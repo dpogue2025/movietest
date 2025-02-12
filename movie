@@ -1,39 +1,48 @@
 def create_movies_file():
+    """Creates a text file with initial movie titles if it doesn't exist."""
     with open("movies.txt", "w") as file:
         file.write("Cat on a Hot Tin Roof\n")
         file.write("On the Waterfront\n")
         file.write("Monty Python and the Holy Grail\n")
 
 def display_menu():
+    """Displays a menu with available options for the user."""
     print("\nMovie List Management")
     print("----------------------")
     print("1. Display all movie titles")
     print("2. Add a movie title")
     print("3. Delete a movie title")
     print("4. Exit")
+    print("\nPlease enter the number corresponding to your choice.")
 
 def load_movies():
+    """Loads movies from the text file into a list."""
     with open("movies.txt", "r") as file:
         movies = file.readlines()
     return [movie.strip() for movie in movies]  # Strip newline characters
 
 def display_movies(movies):
+    """Displays the list of movies."""
     print("\nMovie List:")
     for idx, movie in enumerate(movies, start=1):
         print(f"{idx}. {movie}")
 
 def add_movie(movies):
+    """Adds a new movie title to the list and updates the text file."""
     new_movie = input("Enter the title of the movie to add: ")
     movies.append(new_movie)
     write_movies_to_file(movies)
+    print("\nUpdated Movie List:")
     display_movies(movies)
 
 def delete_movie(movies):
+    """Deletes a movie title from the list by index and updates the text file."""
     try:
         movie_number = int(input("Enter the number of the movie to delete: ")) - 1
         if 0 <= movie_number < len(movies):
             del movies[movie_number]
             write_movies_to_file(movies)
+            print("\nUpdated Movie List:")
             display_movies(movies)
         else:
             print("Invalid movie number. Please try again.")
@@ -41,17 +50,19 @@ def delete_movie(movies):
         print("Invalid input. Please enter a valid number.")
 
 def write_movies_to_file(movies):
+    """Writes the list of movie titles back to the text file."""
     with open("movies.txt", "w") as file:
         for movie in movies:
             file.write(movie + "\n")
 
 def main():
+    """Main function to run the program."""
     create_movies_file()  # Ensure the file exists
     movies = load_movies()
     
     while True:
         display_menu()
-        command = input("Enter your choice: ")
+        command = input("\nEnter your choice: ")
         
         if command == "1":
             display_movies(movies)
@@ -63,7 +74,7 @@ def main():
             print("Exiting the program. Goodbye!")
             break
         else:
-            print("Invalid command. Please try again.")
+            print("Invalid command. Please choose a number from the menu.")
 
 if __name__ == "__main__":
     main()
