@@ -32,6 +32,7 @@ def add_movie(movies):
     new_movie = input("Enter the title of the movie to add: ")
     movies.append(new_movie)
     write_movies_to_file(movies)
+    print(f"Movie '{new_movie}' has been added.")
     print("\nUpdated Movie List:")
     display_movies(movies)
 
