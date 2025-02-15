@@ -41,8 +41,10 @@ def delete_movie(movies):
     try:
         movie_number = int(input("Enter the number of the movie to delete: ")) - 1
         if 0 <= movie_number < len(movies):
+            removed_movie = movies[movie_number]
             del movies[movie_number]
             write_movies_to_file(movies)
+            print(f"Movie '{removed_movie}' has been deleted.")
             print("\nUpdated Movie List:")
             display_movies(movies)
         else:
